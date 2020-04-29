@@ -5,9 +5,7 @@ lapply(list.of.packages, require, character.only = TRUE)
 rm(list=ls())
 
 
-myfile <- file.choose(new=FALSE)
-csv_data <- read.csv(myfile,header=TRUE,sep=",")
-## rownames(csv_data) <- csv_data[,1]    # set first column as rownames
+csv_data <- read.csv('2Drdkit_chembl364.csv',header=TRUE,sep=",")
 
 ### We will subset the data so that we are clustering them based on 2D RDKit descriptors only
 ### We don't want to include "ID" and "Aff" column, which is the biological endpoint that we are interested in predicting
@@ -18,7 +16,10 @@ rownames(desc) <- csv_data[,1] # set first column as rownames
 #make sure you normalize columns! (for continuous data, not binary)
 matTrans <- scale(desc)
 
+# Compute the distance matrix using default Euclidean distance. 
 d <- dist(desc)
+
+# Apply unsupervised hierarchical clustering with ward linkage.
 tupgma <- upgma(d, method="ward.D2")
 
 write.csv2(tupgma$edge, file = "edges.csv")
