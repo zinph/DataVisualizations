@@ -11,7 +11,7 @@ myvars <- names(csv_data) %in% c('ID', 'Class')
 desc <- csv_data[!myvars]
 
 class <- csv_data$Class
-class_data <- cbind(as.data.frame(row.names(csv_data)),as.data.frame(class))
+class_data <- cbind(as.data.frame(row.names(desc)),as.data.frame(class))
 
 matTrans <- scale(desc) 
 
