@@ -1,13 +1,11 @@
 # Install these packages if not installed already.
 
-list.of.packages <- c("ape","ggtree","phangorn")
+list.of.packages <- c("ape","ggtree","phangorn", "ggplot2")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 lapply(list.of.packages, require, character.only = TRUE)
 rm(list=ls())
 
-
-load("treeScriptWorkspace.Rdata")
 myfile <- file.choose(new=FALSE)  # It will prompt you to choose a csv file.
 csv_data <- read.csv(myfile,header=TRUE,sep=",")
 
